@@ -20,7 +20,6 @@ public class Main extends JFrame {
         button.addActionListener(e -> {
             int angle = counter * 45;
             imagePanel.rotateImage(angle);
-            System.out.println(counter + "   "  + angle);
             counter++;
         });
     }
