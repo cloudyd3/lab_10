@@ -10,25 +10,25 @@ import java.io.IOException;
 
 public class ImagePanel extends JPanel {
 
-    BufferedImage image = ImageIO.read(new File("dorime.jpg"));
-    BufferedImage rotated;
+    private BufferedImage image = ImageIO.read(new File("Lenna.png"));
+    int rotAngle;
 
     public ImagePanel() throws IOException {
     }
 
-    @Override
-    public void paintComponent (Graphics g) {
-        Graphics2D graphics2D = (Graphics2D) g;
-        graphics2D.drawImage(image, 0, 0, null);
+    public void rotateImage(int angle) {
+        rotAngle = angle;
+        repaint();
     }
-
-    public BufferedImage rotateImage(int angle) {
-        AffineTransform at = AffineTransform.getTranslateInstance(100, 100);
-        at.rotate(Math.toRadians(angle), image.getWidth() / 2, image.getHeight() / 2);
-        Graphics2D graphics2D = image.createGraphics();
-        graphics2D.drawImage(image, at, null);
-        graphics2D.dispose();
-
-        return rotated;
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        AffineTransform at = new AffineTransform();
+        at.translate(getWidth() / 2, getHeight() / 2);
+        at.rotate(Math.toRadians(rotAngle));
+        at.scale(0.75,0.75);
+        at.translate(-image.getWidth()/2, -image.getHeight()/2);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(image, at, null);
     }
 }

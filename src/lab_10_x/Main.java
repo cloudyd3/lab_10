@@ -9,13 +9,6 @@ public class Main extends JFrame {
     public static void main(String[] args) throws IOException {
         ImagePanel imagePanel = new ImagePanel();
         JButton button = new JButton("rotate 45");
-        button.addActionListener(e -> {
-            int angle = counter * 45;
-            imagePanel.rotateImage(angle);
-            System.out.println(counter + "   "  + angle);
-            counter++;
-            imagePanel.repaint();
-        });
         JFrame frame = new JFrame();
 		frame.setLayout(new BorderLayout());
 		frame.add(imagePanel, BorderLayout.CENTER);
@@ -24,5 +17,11 @@ public class Main extends JFrame {
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        button.addActionListener(e -> {
+            int angle = counter * 45;
+            imagePanel.rotateImage(angle);
+            System.out.println(counter + "   "  + angle);
+            counter++;
+        });
     }
 }
